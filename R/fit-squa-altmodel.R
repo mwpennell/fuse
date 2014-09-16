@@ -31,7 +31,7 @@ tmp <- mcmc(feq, x.init = p.feq, w=1, prior=prior,
 
 w <- diff(sapply(tmp[2:6], range))
 
-samp <- mcmc(feq, x.init = p.feq, w=1, prior=prior,
+samp <- mcmc(feq, x.init = p.feq, w=w, prior=prior,
              nsteps=50000, print.every = 1000)
 
 saveRDS(samp, "output/results/squa-5par.rds")

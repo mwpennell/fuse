@@ -1,4 +1,3 @@
-## squamate analysis
 library(diversitree)
 
 td <- readRDS("output/data/squa.rds")
@@ -21,20 +20,16 @@ p <- starting.point.musse(phy,k=4)
 prior <- make.prior.exponential(10)
 
 feq <- constrain(lik, q14~0, q24~0, q32~0, q42~0,
-                 q43~0, q23~qzw, q13~qzw,
-                 q41~qxy, q31~qxy, q21~qxy,
-                 extra=c("qzw", "qxy"))
-p.feq <- rep(p["q12"], 4)
+                 q43~0,q41~0)
+p.feq <- rep(p["q12"], 6)
 names(p.feq) <- argnames(feq)
 
 tmp <- mcmc(feq, x.init = p.feq, w=1, prior=prior,
             nsteps=100, print.every = 0)
 
-w <- diff(sapply(tmp[2:5], range))
+w <- diff(sapply(tmp[2:7], range))
 
 samp <- mcmc(feq, x.init = p.feq, w=w, prior=prior,
              nsteps=50000, print.every = 1000)
 
-saveRDS(samp, "output/results/squa-4par.rds")
-
-
+saveRDS(samp, "output/results/squa-6par.rds")

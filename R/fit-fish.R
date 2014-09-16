@@ -21,7 +21,7 @@ p <- starting.point.musse(phy,k=4)
 prior <- make.prior.exponential(10)
 
 feq <- constrain(lik, q14~0, q24~0, q32~0, q42~0,
-                 q43~qzw, q23~qzw, q13~qzw,
+                 q43~0, q23~qzw, q13~qzw,
                  q41~qxy, q31~qxy, q21~qxy,
                  extra=c("qzw", "qxy"))
 p.feq <- rep(p["q12"], 4)
@@ -32,10 +32,10 @@ tmp <- mcmc(feq, x.init = p.feq, w=1, prior=prior,
 
 w <- diff(sapply(tmp[2:5], range))
 
-samp <- mcmc(feq, x.init = p.feq, w=1, prior=prior,
+samp <- mcmc(feq, x.init = p.feq, w=w, prior=prior,
              nsteps=50000, print.every = 1000)
 
-saveRDS(samp, "output/results/fish-feq.rds")
+saveRDS(samp, "output/results/fish-4par.rds")
 
 
 
