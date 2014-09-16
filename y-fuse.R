@@ -158,6 +158,9 @@ length(which(salt$ff >= 0))/length(salt$ff)
 ## 4. ZX -> XY
 ## 5. XXY -> XY
 ## 6. XXY -> ZW
+
+## All else set to 0
+
 fsix <- readRDS("output/results/fish-6par.rds")
 ssix <- readRDS("output/results/squa-6par.rds")
 
