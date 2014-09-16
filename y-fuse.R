@@ -194,6 +194,14 @@ profiles.plot(ssix["ff"], col.line="#053061")
 length(which(ssix$ff >= 0))/length(ssix$ff)
 
 
+six <- data.frame(fish=fsix$ff, squa=ssix$ff)
+par(mar=c(5, 4, 2, 2))
+profiles.plot(six[c("fish", "squa")], col.line=c("#86B8B1","#FA2A00"),
+              xlim=c(-0.01, 0.05),
+              xlab="Difference in fusion rates between XY and ZW",
+              opacity=0.7, yaxt="n", frame.plot=FALSE, cex=2)
+abline(v=0, lwd=2, lty=2, col="#3D1C00")
+
 
 
 
@@ -501,6 +509,15 @@ if (!interactive()){
     par(mar=c(5,0,4,2))
     profiles.plot(seq["ff"], col.line="#86B8B1", xlab="", ylab="",
                   yaxt="n",  opacity = 1)
+    abline(v=0, lwd=2, lty=2, col="#3D1C00")
+    dev.off()
+
+    pdf("output/figs/fusion-xyzw.pdf")
+    par(mar=c(5, 4, 2, 2))
+    profiles.plot(six[c("fish", "squa")], col.line=c("#86B8B1","#FA2A00"),
+               xlim=c(-0.01, 0.05),
+               xlab="Difference in fusion rates between XY and ZW",
+               opacity=0.7, yaxt="n", frame.plot=FALSE, cex=2)
     abline(v=0, lwd=2, lty=2, col="#3D1C00")
     dev.off()
 
