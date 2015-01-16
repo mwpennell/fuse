@@ -1,0 +1,26 @@
+\documentclass[12pt,twoside]{article}
+
+% Things that are not loaded by the package, though these might be
+% generally useful.
+\usepackage{natbib}
+\usepackage{graphicx}
+\setcounter{secnumdepth}{0}
+
+\usepackage{amsthm}
+
+% Load the package first - should sort everything out...
+\usepackage{suppmat}
+
+% ...and then we add some metadata
+\titleprefix{Supplemental Material}
+\runninghead{Y fuse?}
+\title{Y fuse? Sex chromosome fusions in fishes and reptiles}
+\author{Jun Kitano$^1$, Matthew W. Pennell$^2$, Mark Kirkpatrick$^3$, Sarah P. Otto$^4$, Jana C. Vamosi$^5$, \& Catherine L. Peichel$^6$}
+\address{Department of Biological Sciences \& Institute for Bioinformatics
+an Evolutionary Studies, University of Idaho}
+\emailaddress{\email{josef.uyeda@gmail.com}}
+\date{}
+
+\begin{document}
+
+\maketitle
