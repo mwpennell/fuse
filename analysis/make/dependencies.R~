@@ -1,0 +1,10 @@
+#!/usr/bin/env Rscript
+
+pkgs.cran <- c(
+
+pkgs.github <- c("mwpennell/arbutus"="1.0",
+                 "richfitz/sowsear"="0.1-1")
+
+pkgs <- installed.packages()
+
+

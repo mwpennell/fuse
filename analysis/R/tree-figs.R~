@@ -1,0 +1,14 @@
+library(diversitree)
+
+## set colors
+col.tree <- list(G=c("#86B8B1","#FA2A00"), K=c("#F2D694","#3D1C00"))
+
+## ### Plot sex chromosomes on tree
+## Fish data
+fdat <- readRDS("output/data/fish.rds")
+
+
+genus.fish <- sub("_.+$", "", fdat$phy$tip.label)
+trait.plot(ladderize(fdat$phy), dat=as.data.frame(fdat$dat), cols=col.tree,
+           lab=c("Genotype", "Fused"), str=list(c("XY", "ZW"), c("No", "Yes")),
+           class=genus.fish, quiet=TRUE, w=1/10, margin=1/1.4, cex.legend = 1)

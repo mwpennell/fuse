@@ -1,0 +1,73 @@
+library(diversitree)
+
+td <- readRDS("output/data/squa-indchrom.rds")
+
+phy <- td$phy
+states <- td$data
+
+## only 5 states as WA (ZZW) has no match to tree
+
+lik <- make.mkn(phy, states, k=5)
+
+p <- starting.point.musse(phy, 5)
+
+## states
+## 1: XY
+## 2: ZW
+## 3: YA (XXY)
+## 4: ZA (ZWW)
+## 5: WA (ZZW)
+
+## Constraints
+
+## Constraints 1 and 2 are biologically enforced
+
+## 1. Disallow transtions from all fused to other fused states
+lik.one <- constrain(lik, q34~0, q35~0, q43~0, q45~0, q53~0, q54~0)
+
+## 2. Disallow transitions from XY <-> ZW fused / ZW <-> XY fused
+lik.two <- constrain(lik.one, q15~0, q51~0, q23~0, q32~0, q41~0, q14~0)
+
+p.two <- p[argnames(lik.two)]
+ml.two <- find.mle(lik.two, p.two)
+
+## 3. Constrain back transtions to all have equal rates
+lik.thr <- constrain(lik.two, q42~q31, q52~q31)
+
+p.thr <- p[argnames(lik.thr)]
+ml.thr <- find.mle(lik.thr, p.thr)
+
+anova(ml.thr, ml.two)
+
+## Accept this constraint
+
+## 4. Do YA fusions occur at different rates than XA
+lik.four <- constrain(lik.two, q14~q13)
+
+p.four <- p[argnames(lik.four)]
+ml.four <- find.mle(lik.four, p.four)
+
+anova(ml.four, ml.thr)
+
+## YES, SIGNIFICANTLY SO
+
+## 5. Do YA fusions occur at different rates than ZA
+lik.five <- constrain(lik.thr, q25~q13)
+
+p.five <- p[argnames(lik.five)]
+ml.five <- find.mle(lik.five, p.five)
+
+anova(ml.thr, ml.five)
+
+## YES, SIGNIFICANTLY SO
+
+## 6. Do ZA fusions rates differ from XA
+
+lik.six <- constrain(lik.thr, q25~q14)
+
+p.six <- p[argnames(lik.six)]
+ml.six <- find.mle(lik.six, p.six)
+
+anova(ml.thr, ml.six)
+
+## NOT ANY DIFFERENT

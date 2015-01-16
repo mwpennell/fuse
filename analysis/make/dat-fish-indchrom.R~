@@ -1,0 +1,48 @@
+## generate dataset for hermaphrodite-gonochoristic transition analysis -- fish
+
+## source files for pruning trees
+source("R/phyutility.R")
+
+## read in dataset
+d.all <- read.csv("datasets/vert.data-may19.csv")
+
+d <- subset(d.all, Higher.taxonomic.group == "Fish")
+
+## fix species names
+d$species <- sapply(d$species, function(x) gsub("[-]", replacement="", x))
+d$species <- sapply(d$species, function(x) gsub("*([0-9])", replacement="", x))
+
+## add new column with full name
+d$name <- sapply(seq_len(nrow(d)), function(x) paste(d[x,"Genus"], d[x, "species"], sep="_"))
+
+## fix column name for notes column
+notes <- grep("notes", colnames(d))
+colnames(d)[notes] <- "notes"
+
+k <- grep("Karyotype", colnames(d))[1]
+h.names <- c("homomorphic", "XY", "ZW", "complex XY", "complex ZW")
+tmp <- which(d[,k] %in% h.names)
+dd <- d[tmp,]
+
+## Y-A fusions
+ya.fish <- grep("X2", dd$notes)
+names(ya.fish) <- dd$binom[ya.fish]
+tmp.ya <- sapply(names(ya.fish), function(x) {strsplit(x, split=" ")[[1]][1]})
+
+## X-A fusions
+xa.fish <- grep("Y2", dd$notes)
+names(xa.fish) <- dd$binom[xa.fish]
+tmp.xa <- sapply(names(xa.fish), function(x) {strsplit(x, split=" ")[[1]][1]})
+
+
+## Z-A fusions
+za.fish <- grep("W2", dd$notes)
+names(za.fish) <- dd$binom[za.fish]
+tmp.za <- sapply(names(za.fish), function(x) {strsplit(x, split=" ")[[1]][1]})
+
+## W-A fusions
+wa.fish <- grep("Z2", dd$notes)
+names(wa.fish) <- dd$binom[wa.fish]
+tmp.wa <- sapply(names(wa.fish), function(x) {strsplit(x, split=" ")[[1]][1]})
+
+
