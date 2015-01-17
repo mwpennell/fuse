@@ -269,7 +269,7 @@ s_mcmc_rev$resid <- s_mcmc_rev$xy - s_mcmc_rev$zw
 
 fig_fusion_resid <- function(x, taxa){
     profiles.plot(x["resid"], col.line=col.taxa[taxa], opacity=0.9,
-                  xlab="Difference between XY and ZW in residency time of fusions",
+                  xlab="Difference in fusion residency time (XY - ZW)",
                   frame.plot=FALSE)
     axis(side=1)
     abline(v=0, lwd=2, lty=2, col=col.vlin)
