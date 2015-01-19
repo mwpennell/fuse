@@ -29,10 +29,19 @@ raw_amph <- subset(raw_all, Higher.taxonomic.group=="Amphibia")
 get_fusion_counts <- function(x){
    ct <- lapply(c("X2", "Y2", "Z2", "W2"), function(i) count_fusions(x,i))
    ct <- do.call(cbind, ct)
+   xy_sys <- x[x$karyotype == "XY" | x$karyotype == "complex XY", ]
+   xy_rec <- nrow(xy_sys)
+   xy_uni <- length(unique(xy_sys$binom))
+   zw_sys <- x[x$karyotype == "ZW" | x$karyotype == "complex ZW", ]
+   zw_rec <- nrow(zw_sys)
+   zw_uni <- length(unique(zw_sys$binom))
    tot <- nrow(x[x$karyotype != "",])
    uni <- length(unique(x[x$karyotype != "","binom"]))
-   out <- cbind(ct, tot, uni)
-   colnames(out) <- c("Y-A", "X-A", "W-A", "Z-A", "total_records", "unique_spp")
+   out <- cbind(ct, xy_rec, xy_uni, zw_rec, zw_uni, tot, uni)
+   colnames(out) <- c("Y-A", "X-A", "W-A", "Z-A",
+                      "XY_records", "XY_unique_spp",
+                      "ZW_records", "ZW_unique_spp",
+                      "total_records", "total_unique_spp")
    out
 }
 
