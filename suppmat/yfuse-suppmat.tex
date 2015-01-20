@@ -67,18 +67,18 @@ For the squamate data, we took two approaches. First, we assumed that the `equal
 
 As mentioned above, the squamate data contain very little information about fission rates, especially from $ZW_F$ to $ZW$. The likelihood approach has difficulty distinguishing between two explanations for the lack of fused ZW chromosomes: rare ZW fusions or common ZW fissions. Nevertheless, there is a strong signal that ZW fusions should be less common, which we confirmed by considereing residency times $t_R$. For XY fusions,
 \begin{equation}
-t_{R,XY_F} = \frac{q_{XY.XY_F}}{(q_{XY.XY_F} + q_{XY_F.XY})}
+t_{R,XY_F} = \frac{q_{XY.XY_F}}{q_{XY.XY_F} + q_{XY_F.XY}}
 \end{equation}
 and for ZW fusions
 \begin{equation}
-t_{R,ZW_F} = \frac{q_{ZW.ZW_F}}{(q_{ZW.ZW_F} + q_{ZW_F.ZW})}
+t_{R,ZW_F} = \frac{q_{ZW.ZW_F}}{q_{ZW.ZW_F} + q_{ZW_F.ZW}}
 \end{equation}
 Using a Bayesian analysis, we found very strong support for the residency time being greater for XY fusions than ZW fusions (99.8\% of the posterior probability supported $t_{R,XY_F} > t_{R,ZW_F}$; Figure \ref{fig:squa-resid}). In the absence of direct information about fission rates for fused ZW chromosomes, we conclude that the data is more parsimoniously explained by rare ZW fusions, while acknowledging that rapid ZW fission rates may also explain the data for squamates.
 
 \begin{figure}[p]
 \centering
 \includegraphics[scale=1.1]{figs/karyotype-residency-squa-6par}
-\caption{Posterior estimate of the difference in residency time between XY and ZW fusions (i.e., $q_{R,XY_F} - q_{R,ZW_F}$) in squamate reptiles.}
+\caption{Posterior estimate of the difference in residency time between XY and ZW fusions (i.e., $t_{R,XY_F} - t_{R,ZW_F}$) in squamate reptiles.}
 \label{fig:squa-resid}
 \end{figure}
 
