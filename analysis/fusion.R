@@ -528,7 +528,7 @@ if (!interactive()){
     to_pdf("output/figs/karyotype-fusion-squa-6par.pdf", 4, 4,
            fig_fusion_rates(s_mcmc_rev, "squa"))
 
-    to_pdf("output/figs/karyotype-residency-squa-6par.pdf", 4, 4,
+    to_pdf("output/figs/karyotype-residency-squa-6par.pdf", 4.75, 4.75,
            fig_fusion_resid(s_mcmc_rev, "squa"))
 
     to_pdf("output/figs/chromosome-fusion-fish.pdf", 4, 4,
