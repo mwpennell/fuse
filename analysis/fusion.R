@@ -61,6 +61,20 @@ rownames(counts) <- c("Fish", "Squamates", "Turtles", "Mammals",
 write.csv(counts, "output/results/counts-raw.csv")
 
 
+
+
+## Build fusion table a different way
+build_fusion_table <- function(x)
+    lapply(c("X2", "Y2", "Z2", "W2"), function(i) collate_fusions(x,i))
+
+collate_fusions <- function(x, fusion){
+    id <- grep(fusion, x$notes)
+    data.frame(species=x$binom[id], notes=x$notes[id])
+}
+    
+
+
+
 ## ## Part B: XY vs ZW Systems
 
 ## define constraint functions
@@ -506,7 +520,16 @@ s_mcmc_chr <- s_mcmc_chr[-seq_len(10000),]
 ## Differences between YA and XA
 s_mcmc_chr$xy <- s_mcmc_chr$q13 - s_mcmc_chr$q24
 
-fig_fusion_rates_xy(s_mcmc_chr, "squa")
+fig_fusion_rates_wy <- function(x, taxa){
+    profiles.plot(x["xy"], col.line=col.taxa[taxa], opacity=0.9,
+                  xlab="Difference between YA and WA/ZA fusion rates",
+                  frame.plot=FALSE)
+    axis(side=1)
+    abline(v=0, lwd=2, lty=2, col=col.vlin)
+}
+
+
+fig_fusion_rates_wy(s_mcmc_chr, "squa")
 
 ## What proportion of posterior supports YA > XA/ZA
 length(which(s_mcmc_chr$xy > 0))/nrow(s_mcmc_chr)
@@ -535,7 +558,7 @@ if (!interactive()){
            fig_fusion_rates_xy(f_mcmc_chr, "fish"))
 
     to_pdf("output/figs/chromosome-fusion-squa.pdf", 4, 4,
-           fig_fusion_rates_xy(s_mcmc_chr, "squa"))
+           fig_fusion_rates_wy(s_mcmc_chr, "squa"))
 
 }
     
